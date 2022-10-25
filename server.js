@@ -1,10 +1,15 @@
 const express = require('express');
 const app = express();
+const snapshot = require('./snapshot.json')
+const cors = require("cors");
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.use(cors());
+app.use(express.json());
+
+app.get('/snapshot', (req, res) => {
+  res.json(snapshot);
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+app.listen(8080, () => {
+  console.log('Example app listening on port 8080!');
 });
