@@ -1,6 +1,6 @@
 const sgMail = require("@sendgrid/mail");
-const { Then } = require("cucumber");
-require("dotenv").config();
+// const { Then } = require("cucumber");
+// require("dotenv").config();
 
 const { SENDGRID_API_KEY } = process.env;
 
