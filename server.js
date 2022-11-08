@@ -5,24 +5,54 @@ const cors = require("cors");
 const sgMailUser = require("./sendgrid/app");
 const fsz = require("fs");
 const axios = require("axios");
+
 app.use(cors());
 app.use(express.json());
 
 app.get("/snapshot", (req, res) => {
   res.json(snapshot);
 });
+let Vimeo = require("vimeo").Vimeo;
+let client = new Vimeo(
+  "68f6f673aa712f8af7ef955106988100cbf0ee52",
+  "ulGry+oOxpODD0oeomumwiRj8mw5tRDm+BbEkNPgM++umJ44fW1AcTDFDXhUkcY7OjV2dZ7XLAWwO51csXdqT2Dx1F6k9+fx4fla5k6ksu7TelCUaezsgKOyCI5QtqYE",
+  "1868ceb45615824ad8ce1aa88f33ff34"
+);
 
 app.get("/video", async (req, res) => {
-  try {
-    const res = await axios.post(
-      "https://api.vimeo.com/oauth/authorize/client",
-      req.body,
-      req.headers
-    );
-    console.log("first");
-  } catch (error) {
-    res.json(error);
-  }
+  client.request(
+    "https://vimeo.com/api/oembed.json?url=https://vimeo.com/767582772",
+    // "https://api.vimeo.com/me/videos/767582772",
+    function (error, body, statusCode, headers) {
+      if (error) {
+        console.log("There was an error making the request.");
+        console.log("Server reported: " + error);
+        console.log(statusCode);
+        return;
+      }
+      console.log(statusCode);
+      // console.log(headers);
+      // res.setHeader("Content-Type", "application/json");
+      res.status(200).json(body);
+      // setHeader({
+      //   "Access-Control-Allow-Credentials": true,
+      //   "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Methods": "GET",
+      //   "Access-Control-Allow-Headers": "application/json",
+      // });
+      // console.log("Your video link is: " + body.link);
+    }
+  );
+  // try {
+  //   const res = await axios.get(
+  //     "https://api.vimeo.com/videos/767582772",
+  //     req.body,
+  //     req.headers
+  //   );
+  //   console.log("first");
+  // } catch (error) {
+  //   res.json(error);
+  // }
 });
 
 // https://drive.google.com/drive/folders/1fxqd9hhnhPNHuUQ70r_1nXqoH4lt8AXO?usp=share_link
