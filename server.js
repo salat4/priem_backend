@@ -22,25 +22,13 @@ let client = new Vimeo(
 app.get("/video", async (req, res) => {
   client.request(
     "https://vimeo.com/api/oembed.json?url=https://vimeo.com/767582772",
-    // "https://api.vimeo.com/me/videos/767582772",
     function (error, body, statusCode, headers) {
       if (error) {
         console.log("There was an error making the request.");
         console.log("Server reported: " + error);
-        console.log(statusCode);
         return;
       }
-      console.log(statusCode);
-      // console.log(headers);
-      // res.setHeader("Content-Type", "application/json");
       res.status(200).json(body);
-      // setHeader({
-      //   "Access-Control-Allow-Credentials": true,
-      //   "Access-Control-Allow-Origin": "*",
-      //   "Access-Control-Allow-Methods": "GET",
-      //   "Access-Control-Allow-Headers": "application/json",
-      // });
-      // console.log("Your video link is: " + body.link);
     }
   );
   // try {
