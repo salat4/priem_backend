@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const snapshot = require("./snapshot.json");
 const cors = require("cors");
-const sgMailUser = require("./sendgrid/app");
-const fsz = require("fs");
-const axios = require("axios");
+// const sgMailUser = require("./sendgrid/app");
+// const fsz = require("fs");
+// const axios = require("axios");
 
 app.use(cors());
 app.use(express.json());
