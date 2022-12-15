@@ -21,7 +21,7 @@ let client = new Vimeo(
 
 app.get("/video", async (req, res) => {
   client.request(
-    "https://vimeo.com/api/oembed.json?url=https://vimeo.com/767582772",
+    "https://api.vimeo.com/me/folders/13582138/videos",
     function (error, body, statusCode, headers) {
       if (error) {
         console.log("There was an error making the request.");
@@ -31,16 +31,6 @@ app.get("/video", async (req, res) => {
       res.status(200).json(body);
     }
   );
-  // try {
-  //   const res = await axios.get(
-  //     "https://api.vimeo.com/videos/767582772",
-  //     req.body,
-  //     req.headers
-  //   );
-  //   console.log("first");
-  // } catch (error) {
-  //   res.json(error);
-  // }
 });
 
 // https://drive.google.com/drive/folders/1fxqd9hhnhPNHuUQ70r_1nXqoH4lt8AXO?usp=share_link
